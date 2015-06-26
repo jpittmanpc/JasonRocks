@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import com.firebase.client.AuthData;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -22,8 +24,6 @@ public class MainActivity extends Activity {
     EditText email;
     EditText password;
     Button button;
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //---------Setting the Layout to be fragment_main-----------
@@ -31,22 +31,37 @@ public class MainActivity extends Activity {
         //Setting up Firebase to be "Android Context"
         Firebase.setAndroidContext(this);
         final Firebase fbref = new Firebase(url);
+        fbref.addAuthStateListener(new Firebase.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(AuthData authData) {
+                if (authData != null) {
+                    System.out.println("user is logged in as " + authData.getUid());
+                    Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_LONG).show();
+                    Intent bypassLogin = new Intent( getBaseContext() , Activity2.class );
+                    startActivity( bypassLogin );
+                } else {
+                    System.out.println("user logged out.");
+                }
+            }
+        });
+
         //Variables for the input fields & the button
         final EditText emailField = (EditText) findViewById(R.id.email);
         final EditText passField = (EditText) findViewById(R.id.password);
         final Button button=(Button) findViewById(R.id.loginbutton);
         button.setOnClickListener(new View.OnClickListener() {
-        @Override
+          @Override
             public void onClick(View v) {
                 //This is the text that they input
                 String emailText = emailField.getText().toString();
                 String passwordText = passField.getText().toString();
                 System.out.println("User: " + emailText + "pass: " + passwordText);
-               // final Firebase fbref = new Firebase(url);
                 fbref.authWithPassword(emailText, passwordText, new Firebase.AuthResultHandler() {
                     @Override
                     public void onAuthenticated(AuthData authData) {
                         System.out.println("User ID:" + authData.getUid() + " authenticated with " + authData.getProvider());
+                        Intent i = new Intent(getBaseContext(), Activity2.class);
+                        startActivity(i);
                     }
 
                     @Override
@@ -55,18 +70,6 @@ public class MainActivity extends Activity {
                     }
                 });
             }
-        });
-        fbref.addAuthStateListener(new Firebase.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(AuthData authData) {
-                if (authData != null) {
-                    System.out.println("user is logged in as " + authData.getUid());
-                } else {
-                    System.out.println("user logged out.");
-                }
-            }
-
-
         });
 
 

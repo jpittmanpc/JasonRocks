@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <ListView
+        android:layout_width="318dp"
+        android:layout_height="503dp"
+        android:id="@+id/listView"
+        android:layout_gravity="center_horizontal"
+        tools:listitem="@android:layout/simple_list_item_1"
+        tools:listheader="@layout/abc_dialog_title_material" />
+</GridLayout>
