@@ -7,4 +7,6 @@
     <string name="password">password</string>
     <string name="loginbutton">LOGIN</string>
     <string name="title_activity_activity2">Activity2</string>
+    <string name="title_activity_create_post">Create Post</string>
+    <string name="title_activity_detailed_post_view">DetailedPostView</string>
 </resources>

@@ -16,6 +16,7 @@ public class Post implements Comparable<Post>, Serializable {
     private int likes;
     private Set<String> likeNames;
     private long timePosted;
+    private int title;
 
 
     public Post(String author, String message, String UID)
@@ -85,9 +86,7 @@ public class Post implements Comparable<Post>, Serializable {
         return likeNames;
     }
 
-    public void setlikeNames(Set<String> likeNames) {
-        this.likeNames = likeNames;
-    }
+
 
     public long getTimePosted() {
         return timePosted;
@@ -111,6 +110,8 @@ public class Post implements Comparable<Post>, Serializable {
     }
 
 
-
+    public int getTitle() {
+        return title;
+    }
 }
 

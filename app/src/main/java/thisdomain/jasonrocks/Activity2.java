@@ -1,14 +1,25 @@
 package thisdomain.jasonrocks;
 
 import android.app.Activity;
+import android.app.Application;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.firebase.client.Firebase;
+
 
 public class Activity2 extends Activity {
+    public class FirebaseApplication extends Application
+    {
+        @Override
+        public void onCreate() {
+            Firebase.setAndroidContext(this);
+            super.onCreate();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
