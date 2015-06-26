@@ -15,6 +15,7 @@ public class Activity2 extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity2);
         ListView main;
+
     }
 
     @Override
